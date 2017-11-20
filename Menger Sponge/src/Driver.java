@@ -8,20 +8,12 @@ import java.util.*;
 
 public class Driver
 {
-    static FloatBuffer buffer;
-    static boolean keyUP;
-    static boolean keyDown;
-    static int counter;
+    static FloatBuffer buffe r= BufferUtils.createFloatBuffer(16);;
+    static boolean keyUP = false;
+    static boolean keyDown = false;
+    static int counter = 0;
     
-    static {
-        Driver.buffer = BufferUtils.createFloatBuffer(16);
-        Driver.keyUP = false;
-        Driver.keyDown = false;
-        Driver.counter = 0;
-    }
-    
-    public static void main(final String[] args) throws InterruptedException {
-        GLFWErrorCallback.createPrint(System.err).set();
+    public static void main(String[] args) throws InterruptedException {
         if (!GLFW.glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
@@ -51,7 +43,7 @@ public class Driver
         GLFW.glfwSwapInterval(1);
         GLFW.glfwShowWindow(window);
         GL.createCapabilities();
-        System.out.println(GL11.glGetString(7938));
+        System.out.println(GL11.glGetString(GL11.GL_VERSION));
         GL11.glViewport(0, 0, 300, 300);
         final ShaderManager shader = new ShaderManager("BasicShader");
         shader.loadShader(new File("C:\\Users\\Administrator\\workspaceEclipse\\MengerSponge\\src\\vertexShader.vsh"), 0);
@@ -64,11 +56,11 @@ public class Driver
         final Box menger = new Box(1.0f, position, shader.shaderID);
         mengerSponge.add(menger);
         container.add(mengerSponge);
-        GL11.glEnable(2929);
-        GL11.glPolygonMode(1032, 6913);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
         while (!GLFW.glfwWindowShouldClose(window)) {
             GLFW.glfwPollEvents();
-            GL11.glClear(16640);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
             if (Driver.keyUP) {
                 final ArrayList<Box> next = new ArrayList<Box>();
                 for (final Box b : container.get(Driver.counter)) {

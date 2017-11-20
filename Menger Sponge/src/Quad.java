@@ -21,11 +21,11 @@ public class Quad
     }
     
     public void init() {
-        GL15.glBindBuffer(34962, this.VBO = GL15.glGenBuffers());
-        GL15.glBufferData(34962, TextureManager.Quadvertices, 35044);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, this.VBO = GL15.glGenBuffers());
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, TextureManager.Quadvertices, GL15.GL_STATIC_DRAW);
         GL20.glEnableVertexAttribArray(this.posLocation = GL20.glGetAttribLocation(this.shaderProgram, "position"));
-        GL20.glVertexAttribPointer(this.posLocation, 3, 5126, false, 0, 0L);
-        GL15.glBindBuffer(34962, 0);
+        GL20.glVertexAttribPointer(this.posLocation, 3, GL20.GL_FLOAT, false, 0, 0L);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
     
     public void render() {
@@ -37,9 +37,9 @@ public class Quad
         final int proj = GL20.glGetUniformLocation(this.shaderProgram, "proj");
         final Matrix4f projection = new Matrix4f().perspective((float)Math.toRadians(45.0), 1.0f, 0.1f, 100.0f).lookAt(0.0f, 0.0f, -3.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         GL20.glUniformMatrix4fv(proj, false, projection.get(this.buffer));
-        GL15.glBindBuffer(34962, this.VBO);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, this.VBO);
         GL11.glDrawArrays(4, 0, 6);
-        GL15.glBindBuffer(34962, 0);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
     
     public void clean() {

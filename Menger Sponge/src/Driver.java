@@ -46,8 +46,8 @@ public class Driver
         System.out.println(GL11.glGetString(GL11.GL_VERSION));
         GL11.glViewport(0, 0, 300, 300);
         final ShaderManager shader = new ShaderManager("BasicShader");
-        shader.loadShader(new File("C:\\Users\\Administrator\\workspaceEclipse\\MengerSponge\\src\\vertexShader.vsh"), 0);
-        shader.loadShader(new File("C:\\Users\\Administrator\\workspaceEclipse\\MengerSponge\\src\\fragmentShader.fsh"), 1);
+        shader.loadShader(new File("src/vertexShader.vsh"), ShaderManager.SM_VERTEX);
+        shader.loadShader(new File("src/fragmentShader.fsh"), ShaderManager.SM_FRAGMENT);
         shader.createShaderProgram();
         GL11.glClearColor(0.5f, 0.3f, 0.7f, 1.0f);
         final ArrayList<ArrayList<Box>> container = new ArrayList<ArrayList<Box>>();

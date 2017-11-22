@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'Driver'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets{
+    main.java.srcDir 'src'
+    main.resources.srcDir 'src'
+    sourceSet.java.srcDir 'src'
+    sourceSet.resources.srcDir 'src'
+}
+
+dependencies{
+    compile group: 'org.joml', name: 'joml', version: '1.9.6'
+    compile group: 'org.lwjgl', name: 'lwjgl', version: '3.1.0'
+    compile group: 'org.lwjgl', name: 'lwjgl-opengl', version: '3.1.0'
+    compile group: 'org.lwjgl', name: 'lwjgl-glfw', version: '3.1.0'
+    runtime group: 'org.lwjgl', name: 'lwjgl', version: '3.1.0', classifier: 'natives-windows' 
+    runtime group: 'org.lwjgl', name: 'lwjgl-glfw', version: '3.1.0', classifier: 'natives-windows'
+}
+
+jar{
+    manifest.attributes 'Main-Class': 'Driver'
+    manifest.attributes 'Class-Path': configurations.runtime.files.collect { it.getName() }.join(' ')
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    configurations.runtime.files.collect { println it.getName() }
+}

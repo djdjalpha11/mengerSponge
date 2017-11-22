@@ -55,15 +55,8 @@ public class ShaderManager
     public void createShaderProgram() {
         GL20.glShaderSource(this.vertexID, this.vertexShaderCode);
         GL20.glCompileShader(this.vertexID);
-        int[] success = { 0 };
-        GL20.glGetShaderiv(this.vertexID, GL20.COMPILE_STATUS, success);
-        System.out.println(success[0]);
-        GL20.glGetShaderInfoLog(this.vertexID);
         GL20.glShaderSource(this.fragmentID, this.fragmentShaderCode);
         GL20.glCompileShader(this.fragmentID);
-        GL20.glGetShaderiv(this.fragmentID, GL20.COMPILE_STATUS, success);
-        System.out.println(success[0]);
-        System.out.println(GL20.glGetShaderInfoLog(this.fragmentID));
         GL20.glAttachShader(this.shaderID = GL20.glCreateProgram(), this.vertexID);
         GL20.glAttachShader(this.shaderID, this.fragmentID);
         GL20.glLinkProgram(this.shaderID);
